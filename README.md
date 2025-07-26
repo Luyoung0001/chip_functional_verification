@@ -1,0 +1,2 @@
+# chip_functional_verification
+Functional Verification learning notes for UnityChipForXiangShan
