@@ -1,0 +1,50 @@
+{
+    "clk": {
+        "High": -1,
+        "Low": 0,
+        "Pin": "input",
+        "_": true
+    },
+    "empty": {
+        "High": -1,
+        "Low": 0,
+        "Pin": "output",
+        "_": true
+    },
+    "full": {
+        "High": -1,
+        "Low": 0,
+        "Pin": "output",
+        "_": true
+    },
+    "rd_en": {
+        "High": -1,
+        "Low": 0,
+        "Pin": "input",
+        "_": true
+    },
+    "rdata": {
+        "High": 7,
+        "Low": 0,
+        "Pin": "output",
+        "_": true
+    },
+    "rst_n": {
+        "High": -1,
+        "Low": 0,
+        "Pin": "input",
+        "_": true
+    },
+    "wdata": {
+        "High": 7,
+        "Low": 0,
+        "Pin": "input",
+        "_": true
+    },
+    "wr_en": {
+        "High": -1,
+        "Low": 0,
+        "Pin": "input",
+        "_": true
+    }
+}

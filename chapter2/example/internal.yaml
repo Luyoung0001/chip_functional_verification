@@ -1,0 +1,2 @@
+RandomGenerator:
+    - "reg [15:0] lfsr"
