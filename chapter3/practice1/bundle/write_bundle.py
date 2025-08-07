@@ -9,3 +9,5 @@ class WriteBundle(Bundle):
         await self.step()
         self.we.value = 0
         await self.step()
+    def is_full(self) -> bool:
+        return self.agent.internal_bundle.full

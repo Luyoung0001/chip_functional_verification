@@ -9,3 +9,5 @@ class ReadBundle(Bundle):
         self.re.value = 0
         await self.step()
         return self.data.value
+    def is_empty(self) -> bool:
+        return self.agent.internal_bundle.empty
