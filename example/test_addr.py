@@ -1,33 +1,53 @@
-from toffee import *
+import random
 
-# 创建 bundle
-# 我们可以在验证代码中预先定义好需要驱动的接口信号结构，
-# 而不需要关心 DUT 具体的接口信号名称。通过 Bundle 提供的映射方法，可
-# 以将信号映射至任意具有相同结构的 DUT 接口信号上，从而实现验证代码与 DUT 的解耦。
-class AdderBundle(Bundle):
-    a, b, cin, sum, cout = Signals(5)
-
-# 创建 Agent
-# 继续对 bundle 进行封装，使其变成更抽象的驱动方法和观测方法
-class AdderAgent(Agent):
-    @driver_method()
-    async def exec_add(self, a, b, cin):
-        self.bundle.a.value = a
-        self.bundle.b.value = b
-        self.bundle.cin.value = cin
-        await self.bundle.step()
-        return self.bundle.sum.value, self.bundle.cout.value
-
-
-# test_adder.py (continued)
 import toffee_test
-from picker_out_adder import DUTAdder
+from env import AdderBundle
+from env import AdderEnv
+
+import toffee
 
 @toffee_test.testcase
-async def test_adder():
-    adder = DUTAdder()                                        # 实例化加法器
-    start_clock(adder)                                        # 启动 toffee 内置时钟
-    adder_bundle = AdderBundle.from_prefix("io_").bind(adder) # 利用前缀映射方法将 Bundle 与 DUT 进行绑定
-    adder_agent = AdderAgent(adder_bundle)                    # 实例化 Agent
-    sum, cout = await adder_agent.exec_add(1, 2, 0)           # 调用驱动方法
-    assert sum == 3 and cout == 0                             # 验证输出结果
+async def test_random(adder_env):
+    for _ in range(1000):
+        a = random.randint(0, 2**64 - 1)
+        b = random.randint(0, 2**64 - 1)
+        cin = random.randint(0, 1)
+        await adder_env.add_agent.exec_add(a, b, cin)
+
+
+@toffee_test.testcase
+async def test_boundary(adder_env):
+    for cin in [0, 1]:
+        for a in [0, 2**64 - 1]:
+            for b in [0, 2**64 - 1]:
+                await adder_env.add_agent.exec_add(a, b, cin)
+
+
+
+import toffee.funcov as fc
+from toffee.funcov import CovGroup
+
+
+def adder_cover_point(adder):
+    g = CovGroup("Adder addition function")
+
+    g.add_cover_point(adder.io_cout, {"io_cout is 0": fc.Eq(0)}, name="Cout is 0")
+    g.add_cover_point(adder.io_cout, {"io_cout is 1": fc.Eq(1)}, name="Cout is 1")
+    g.add_cover_point(adder.io_cin, {"io_cin is 0": fc.Eq(0)}, name="Cin is 0")
+    g.add_cover_point(adder.io_cin, {"io_cin is 1": fc.Eq(1)}, name="Cin is 1")
+    g.add_cover_point(adder.io_a, {"a > 0": fc.Gt(0)}, name="signal a set")
+    g.add_cover_point(adder.io_b, {"b > 0": fc.Gt(0)}, name="signal b set")
+    g.add_cover_point(adder.io_sum, {"sum > 0": fc.Gt(0)}, name="signal sum set")
+
+    return g
+
+from picker_out_adder import DUTAdder
+
+
+@toffee_test.fixture
+async def adder_env(toffee_request: toffee_test.ToffeeRequest):
+    toffee.setup_logging(toffee.WARNING)
+    dut = toffee_request.create_dut(DUTAdder)
+    toffee_request.add_cov_groups(adder_cover_point(dut))
+    toffee.start_clock(dut)
+    return AdderEnv(AdderBundle.from_prefix("io_").bind(dut))

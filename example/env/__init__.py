@@ -1,8 +1,6 @@
 from .agent import AdderAgent
-from .agent import AdderBundle
 from .refmodel import AdderModelWithDriverHook
 from .refmodel import AdderModelWithMonitorHook
-from .refmodel import AdderModelWithPort
 from toffee import *
 
 
@@ -13,4 +11,3 @@ class AdderEnv(Env):
 
         self.attach(AdderModelWithDriverHook())
         self.attach(AdderModelWithMonitorHook())
-        self.attach(AdderModelWithPort())

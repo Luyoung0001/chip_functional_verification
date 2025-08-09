@@ -1,6 +1,9 @@
-fifo:
-	picker export SyncFIFO.v --sname SyncFIFO -w SyncFIFO.fst --lang python --sim verilator --verilator-args "--coverage"
-clean:
-	rm -rf ./SyncFIFO
+PICKER 	= picker
+NAME	= SyncFIFO
+run:
+	pytest --toffee-report -sv .
+dut:
+	$(PICKER) export --autobuild=true $(NAME).v -w $(NAME).fst --sname $(NAME) --tdir picker_out_$(NAME) --lang python -e -c --sim verilator
 
-.PHONY: example clean
+clean:
+	rm -rf $(NAME) picker_out_$(NAME) reports

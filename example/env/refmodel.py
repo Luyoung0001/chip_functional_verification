@@ -16,25 +16,3 @@ class AdderModelWithMonitorHook(Model):
         sum = item["a"] + item["b"] + item["cin"]
         assert sum & ((1 << 64) - 1) == item["sum"]
         assert sum >> 64 == item["cout"]
-
-
-class AdderModelWithPort(Model):
-    def __init__(self):
-        super().__init__()
-
-        self.exec_add_port = DriverPort("add_agent.exec_add")
-        self.monitor_once_port = MonitorPort("add_agent.monitor_once")
-
-    async def main(self):
-        while True:
-            oprands = await self.exec_add_port()
-            result = await self.monitor_once_port()
-            sum = oprands["a"] + oprands["b"] + oprands["cin"]
-
-            assert {
-                "a": oprands["a"],
-                "b": oprands["b"],
-                "cin": oprands["cin"],
-                "sum": sum & ((1 << 64) - 1),
-                "cout": sum >> 64,
-            } == result
