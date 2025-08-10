@@ -22,82 +22,82 @@ module SyncFIFO_top();
  );
 
 
-  export "DPI-C" function get_clkxxPfBDHPcCNRi;
-  export "DPI-C" function set_clkxxPfBDHPcCNRi;
-  export "DPI-C" function get_rst_nxxPfBDHPcCNRi;
-  export "DPI-C" function set_rst_nxxPfBDHPcCNRi;
-  export "DPI-C" function get_we_ixxPfBDHPcCNRi;
-  export "DPI-C" function set_we_ixxPfBDHPcCNRi;
-  export "DPI-C" function get_re_ixxPfBDHPcCNRi;
-  export "DPI-C" function set_re_ixxPfBDHPcCNRi;
-  export "DPI-C" function get_data_ixxPfBDHPcCNRi;
-  export "DPI-C" function set_data_ixxPfBDHPcCNRi;
-  export "DPI-C" function get_data_oxxPfBDHPcCNRi;
-  export "DPI-C" function get_full_oxxPfBDHPcCNRi;
-  export "DPI-C" function get_empty_oxxPfBDHPcCNRi;
+  export "DPI-C" function get_clkxxPfBDHOMXaxQ;
+  export "DPI-C" function set_clkxxPfBDHOMXaxQ;
+  export "DPI-C" function get_rst_nxxPfBDHOMXaxQ;
+  export "DPI-C" function set_rst_nxxPfBDHOMXaxQ;
+  export "DPI-C" function get_we_ixxPfBDHOMXaxQ;
+  export "DPI-C" function set_we_ixxPfBDHOMXaxQ;
+  export "DPI-C" function get_re_ixxPfBDHOMXaxQ;
+  export "DPI-C" function set_re_ixxPfBDHOMXaxQ;
+  export "DPI-C" function get_data_ixxPfBDHOMXaxQ;
+  export "DPI-C" function set_data_ixxPfBDHOMXaxQ;
+  export "DPI-C" function get_data_oxxPfBDHOMXaxQ;
+  export "DPI-C" function get_full_oxxPfBDHOMXaxQ;
+  export "DPI-C" function get_empty_oxxPfBDHOMXaxQ;
 
 
-  function void get_clkxxPfBDHPcCNRi;
+  function void get_clkxxPfBDHOMXaxQ;
     output logic  value;
     value=clk;
   endfunction
 
-  function void set_clkxxPfBDHPcCNRi;
+  function void set_clkxxPfBDHOMXaxQ;
     input logic  value;
     clk=value;
   endfunction
 
-  function void get_rst_nxxPfBDHPcCNRi;
+  function void get_rst_nxxPfBDHOMXaxQ;
     output logic  value;
     value=rst_n;
   endfunction
 
-  function void set_rst_nxxPfBDHPcCNRi;
+  function void set_rst_nxxPfBDHOMXaxQ;
     input logic  value;
     rst_n=value;
   endfunction
 
-  function void get_we_ixxPfBDHPcCNRi;
+  function void get_we_ixxPfBDHOMXaxQ;
     output logic  value;
     value=we_i;
   endfunction
 
-  function void set_we_ixxPfBDHPcCNRi;
+  function void set_we_ixxPfBDHOMXaxQ;
     input logic  value;
     we_i=value;
   endfunction
 
-  function void get_re_ixxPfBDHPcCNRi;
+  function void get_re_ixxPfBDHOMXaxQ;
     output logic  value;
     value=re_i;
   endfunction
 
-  function void set_re_ixxPfBDHPcCNRi;
+  function void set_re_ixxPfBDHOMXaxQ;
     input logic  value;
     re_i=value;
   endfunction
 
-  function void get_data_ixxPfBDHPcCNRi;
+  function void get_data_ixxPfBDHOMXaxQ;
     output logic [31:0] value;
     value=data_i;
   endfunction
 
-  function void set_data_ixxPfBDHPcCNRi;
+  function void set_data_ixxPfBDHOMXaxQ;
     input logic [31:0] value;
     data_i=value;
   endfunction
 
-  function void get_data_oxxPfBDHPcCNRi;
+  function void get_data_oxxPfBDHOMXaxQ;
     output logic [31:0] value;
     value=data_o;
   endfunction
 
-  function void get_full_oxxPfBDHPcCNRi;
+  function void get_full_oxxPfBDHOMXaxQ;
     output logic  value;
     value=full_o;
   endfunction
 
-  function void get_empty_oxxPfBDHPcCNRi;
+  function void get_empty_oxxPfBDHOMXaxQ;
     output logic  value;
     value=empty_o;
   endfunction
@@ -109,8 +109,8 @@ module SyncFIFO_top();
     $dumpvars(0, SyncFIFO_top);
   end
 
-  export "DPI-C" function finish_PfBDHPcCNRi;
-  function void finish_PfBDHPcCNRi;
+  export "DPI-C" function finish_PfBDHOMXaxQ;
+  function void finish_PfBDHOMXaxQ;
     $finish;
   endfunction
 

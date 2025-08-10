@@ -27,6 +27,8 @@ class FIFOAgent(Agent):
         self.wptr = 0
         self.rptr = 0
 
+        return self.wptr, self.rptr
+
     @driver_method()
     async def enqueue(self, data):
         self.write.we.value = 1
